@@ -7,15 +7,16 @@ import { error } from "console"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const app = express() //instantiate express
-const port = 3000 //save port number where server is listening
+const APP = express() //instantiate express
+const PORT = 3000 //save port number where server is listening
+const OPERATORS = ["+", "-", "*", "/", "^"]
 
-app.get("/", (req, res) => {
-  res.sendFile("index.html", { root: __dirname }) //send index.html file to the client
+APP.get("/", (req, res) => {
+  res.sendFile("index.html", { root: __dirname }) // send index.html file to the client
 })
 
-app.listen(port, () => {
-  //server starts listening on port 3000
+APP.listen(PORT, () => {
+  // server starts listening on port 3000
   greetUser()
 })
 
@@ -51,6 +52,27 @@ const getUserInput = () => {
     ])
     .then((input) => {
       inputEquation = input.equation
+
+      // catch if a user wants to quit as early as possible
+      if (inputEquation.trim() === "q") {
+        console.log(colors.farewell("Exiting RPN Calculator..."))
+        console.log(colors.farewell("See you next time!"))
+        process.exit(1)
+      }
+
+      // if the input does not contain any operators, return an error and await input again
+      if (!findCommonCharacters(inputEquation.trim().split(" "), OPERATORS)) {
+        console.log(
+          colors.error("Error: ") +
+            colors.red(
+              "Invalid input. Please enter a valid RPN equation with operator(s).",
+            ),
+        )
+        getUserInput()
+        return
+      }
+
+      // if user input is valid, compute the equation
       compute(inputEquation)
     })
     .catch((error) => {
@@ -58,57 +80,14 @@ const getUserInput = () => {
     })
 }
 
-// const compute = () => {
-//   let equation = inputEquation.trim().split(" ")
-//   let result = []
-//   let operators = ["+", "-", "*", "/"]
-
-//   // loop over each token/number in the equation, perform the operation, and update result
-//   for (let i = 0; i < equation.length; i++) {
-//     let numberOrOperator = equation[i]
-
-//     // if not a number and not an operator, return error
-//     if (isNaN(numberOrOperator) && !operators.includes(numberOrOperator)) {
-//       exitOrShowError(numberOrOperator)
-//     } else {
-//       if (!isNaN(numberOrOperator)) {
-//         result.push(numberOrOperator)
-//       } else if (operators.includes(numberOrOperator)) {
-//         let a = result.pop()
-//         let b = result.pop()
-
-//         if (numberOrOperator === "+") {
-//           // console.log(a, b, result)
-//           result.push(parseInt(a) + parseInt(b))
-//         } else if (token === "-") {
-//           result.push(parseInt(b) - parseInt(a))
-//         } else if (token === "*") {
-//           result.push(parseInt(a) * parseInt(b))
-//         } else if (token === "/") {
-//           result.push(parseInt(b) / parseInt(a))
-//         }
-//       }
-//     }
-//   }
-
-//   // if there are any errors, return error
-//   // if there are no errors, return result and ask for more input
-//   if (errors.length > 0) {
-//     console.log(colors.error("Error: ") + colors.red(errors[0]))
-//     errors = []
-//   } else {
-//     console.log(colors.success("Result: ") + colors.white(result[0]))
-//   }
-
-//   getUserInput()
-// }
-
 const compute = (inputEquation) => {
   let equation = inputEquation.trim().split(" ")
-  const result = []
-  // let operators = ["+", "-", "*", "/"]
+  let result = []
 
   const evaluateBasedOnOperator = (character) => {
+    console.log(result)
+
+    // if character is a number, not string, push it to the result array
     if (!isNaN(parseFloat(character))) {
       result.push(character)
       return
@@ -119,8 +98,8 @@ const compute = (inputEquation) => {
 
     switch (character) {
       case "+": // Addition
+        // TODO: handle zero as second to last element in array, ex ["1", "9", "0", +]
         result.push(secondNum + firstNum)
-        // result.push(round(+num2 + +num1));
         return
       case "-": // Subtraction
         result.push(secondNum - firstNum)
@@ -136,11 +115,12 @@ const compute = (inputEquation) => {
         result.push(Math.pow(secondNum, firstNum))
         return
       default:
-        throw new Error(`Invalid token: ${character}`)
+        result = []
+        errors.push("Invalid input. Please enter a valid RPN equation.")
     }
   }
 
-  // loop over each token/number in the equation, perform the operation, and update result
+  // loop over each number/operator in the equation, perform the operation, and update result
   for (let i of equation) {
     evaluateBasedOnOperator(i)
   }
@@ -158,12 +138,9 @@ const compute = (inputEquation) => {
   getUserInput()
 }
 
-const exitOrShowError = (character) => {
-  if (character === "q") {
-    console.log(colors.farewell("Exiting RPN Calculator..."))
-    console.log(colors.farewell("See you next time!"))
-    process.exit(1)
-  } else {
-    errors.push("Invalid input. Please enter a valid RPN equation.")
-  }
+const findCommonCharacters = (arr1, arr2) => {
+  // iterate through each element in arr1
+  // check if some of them include elements in the second
+  // return boolean
+  return arr1.some((item) => arr2.includes(item))
 }

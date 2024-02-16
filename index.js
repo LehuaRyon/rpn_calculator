@@ -1,4 +1,6 @@
 const express = require("express") //import express
+const colors = require("colors/safe")
+
 const app = express() //instantiate express
 const port = 3000 //save port number where server is listening
 
@@ -11,6 +13,15 @@ app.listen(port, () => {
   greetUser()
 })
 
+colors.setTheme({
+  welcome: ["bold", "cyan"],
+  error: ["bold", "red"],
+  warning: ["bold", "yellow"],
+  success: ["bold", "green"],
+})
+
 const greetUser = () => {
-  console.log("Hello Mathematician! Are you ready to do some math?")
+  console.log(
+    colors.welcome("Hello Mathematician! Are you ready to do some math?"),
+  )
 }

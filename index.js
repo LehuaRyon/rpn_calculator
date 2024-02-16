@@ -98,7 +98,6 @@ const compute = (inputEquation) => {
 
     switch (character) {
       case "+": // Addition
-        // TODO: handle zero as second to last element in array, ex ["1", "9", "0", +]
         result.push(secondNum + firstNum)
         return
       case "-": // Subtraction
@@ -108,8 +107,12 @@ const compute = (inputEquation) => {
         result.push(secondNum * firstNum)
         return
       case "/": // Division
-        // TODO: handle division by zero
-        result.push(secondNum / firstNum)
+        if (firstNum === 0) {
+          result = []
+          errors.push("Division by zero is not allowed.")
+        } else {
+          result.push(secondNum / firstNum)
+        }
         return
       case "^": // Exponentiation
         result.push(Math.pow(secondNum, firstNum))

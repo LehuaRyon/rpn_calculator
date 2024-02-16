@@ -1,3 +1,27 @@
+# Reverse Polish Notation (RPN) Calculator
+
+- The RPN Calculator uses "Postfix" notation, where operators follow the operands (ex. 1 2 3 + -) compared to what we are generally used to, which is "Infix" notation (ex. 1 + 2 + 3)
+
+For this solution, I did my best to mock how a normal computer would compute a equation using reverse polish notation. After doing some research, I found that computers use a "stack", in which the computer will go through the set of numbers and add each to a list, or "stack". Once the computer recognizes an operator, it then uses the last two numbers to execute the operation and continues doing this same method once all the characters have been gone through.
+
+An overview of of how the solution evaluates the equation:
+
+1. An input if grabbed from the command line and is checked against to see if the user wants to quit OR if the user has not entered any operators
+2. If the input is a valid RPN equation, the input into turned into an array of strings of each character and the result, "stack", array is as empty
+3. Using a for/of loop, we are iterating through the amount of characters that came from the input
+4. First, we are checking if the character is a number, not a string, and pushing it to the results
+5. Second, since order matters for subtraction and division we are assigning the "firstNum" before "secondNum"
+6. Third, if the character is an operator, we are not pushing it to the results and instead use the operator to evaluate the first two numbers in the results
+7. The result is pushed back into the result so it can be used for next operations
+
+- A high-level description of your solution
+- Reasoning behind your technical choices, including architectural
+- Trade-offs you might have made, anything you left out, or what you might do differently if you were to spend additional time on the project
+- How to run your code, if applicable
+- Link to the hosted application, if applicable
+
+---
+
 # Code Sample
 
 We would like to get to know your coding style and see what you would consider your best work.

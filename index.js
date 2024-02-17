@@ -3,7 +3,6 @@ import express from "express"
 import colors from "colors/safe.js"
 import path from "path"
 import { fileURLToPath } from "url"
-import { error } from "console"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -85,7 +84,7 @@ const compute = (inputEquation) => {
   let result = []
 
   const evaluateBasedOnOperator = (character) => {
-    console.log(result)
+    // console.log(result)
 
     // if character is a number, not string, push it to the result array
     if (!isNaN(parseFloat(character))) {
@@ -119,6 +118,7 @@ const compute = (inputEquation) => {
         return
       default:
         result = []
+        // result.splice(0, result.length, element)
         errors.push("Invalid input. Please enter a valid RPN equation.")
     }
   }

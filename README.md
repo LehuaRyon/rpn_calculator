@@ -1,6 +1,10 @@
 # Reverse Polish Notation (RPN) Calculator
 
-- The RPN Calculator uses "Postfix" notation, where operators follow the operands (ex. 1 2 3 + -) compared to what we are generally used to, which is "Infix" notation (ex. 1 + 2 + 3)
+The RPN Calculator CLI tool is meant to be used for executing reverse polish notation equations. RPN uses `Postfix`` notation, where operators follow the operands (ex. 1 2 3 + -) compared to what we are generally used to, which is "Infix" notation (ex. 1 + 2 + 3). It has been built to be easy to use for users who are used to CLI tools and utilities. So far the RPN calculator is able to execute addition, subtraction, multiplication, division, and exponentiation.
+
+In order to read what is inputted on the command line, I have chosen to use the `inquirer` package, which is a simple way to make the tool interactive as well as being able to have the ability to expand the application if I want to at a later time.
+
+# Description of Solution
 
 For this solution, I did my best to mock how a normal computer would compute a equation using reverse polish notation. After doing some research, I found that computers use a "stack", in which the computer will go through the set of numbers and add each to a list, or "stack". Once the computer recognizes an operator, it then uses the last two numbers to execute the operation and continues doing this same method once all the characters have been gone through.
 
@@ -14,13 +18,23 @@ An overview of of how the solution evaluates the equation:
 6. Third, if the character is an operator, we are not pushing it to the results and instead use the operator to evaluate the first two numbers in the results
 7. The result is pushed back into the result so it can be used for next operations
 
-- A high-level description of your solution
-- Reasoning behind your technical choices, including architectural
-- Trade-offs you might have made, anything you left out, or what you might do differently if you were to spend additional time on the project
-- How to run your code, if applicable
-- Link to the hosted application, if applicable
+# Technical Choices & Architecture
 
----
+I chose to build the CLI tool with Javascript and Node.js due to it's simplicity, performance, documentation, and familiarity. I though about attempting to build it in React instead, but though that would be overdoing it for what the requirements entailed.
+
+- **`index.js:`** Where the application begins and handles the logic of the calculator. This includes the RPN evaluation
+
+# Getting the CLI Tool Up and Running
+
+1. Make sure you have Node.js and npm installed
+2. Clone the repository: git clone `https://github.com/LehuaRyon/rpn_calculator.git`
+3. Navigate to the project directory: `cd rpn_calculator`
+4. Install dependencies: `npm install`
+5. Run: `npm start`
+6. Enter RPN expressions when prompted and press enter to see the result.
+7. Enter `q` or use `Ctrl+D` (EOF) to exit the calculator
+
+## Challenge is below:
 
 # Code Sample
 
@@ -43,8 +57,7 @@ There's no need to implement these, but design with these future changes in mind
 1. The calculator should use standard input and standard output
 2. It should implement the four standard arithmetic operators
 3. The calculator should handle errors and recover gracefully
-4. The calculator should exit when it receives a `q` command or an end of input
-   indicator (EOF / Ctrl+D)
+4. The calculator should exit when it receives a `q` command or an end of input indicator (EOF / Ctrl+D)
 
 You may take creative liberty with anything else; have fun with it!
 

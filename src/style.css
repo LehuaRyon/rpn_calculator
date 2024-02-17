@@ -1,0 +1,122 @@
+@font-face {
+  font-display: swap;
+  font-family: wulkan-display;
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://cdn.shopify.com/oxygen-v2/27128/12304/25353/81593/build/_assets/WulkanDisplay-Medium-FGGNV2KL.eot);
+}
+
+:root {
+  --color-beige: #e8ddd2;
+  --color-blue: #7983b0;
+  --color-blue-light: #a0ace3;
+  --color-coral: #e99777;
+  --color-cream: #f5eee9;
+  --color-error: #d80000;
+  --color-gray: #bababa;
+  --color-gray-medium: #797979;
+  --color-gray-light: #bcbcc3;
+  --color-green-dark: #475751;
+  --color-jade: #9bc2ae;
+  --color-lavender: #dcc1d6;
+  --color-mint: #dbe2dd;
+  --color-mint-darker: #7fa193;
+  --color-powder-ash: #b6c8be;
+  --color-sage: #c7d4cd;
+  --color-salmon: #efb7a9;
+  --color-tan: #e3d7cc;
+  --color-white: #ffffff;
+  --content-max-width: 1260px;
+}
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--color-mint);
+  color: var(--color-gray-dark);
+  font-family: -apple-system, sans-serif;
+  height: 100%;
+  line-height: 1.5;
+  margin: 0;
+  display: center;
+}
+
+#calculator_title {
+  font-size: 2.5rem;
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+}
+
+#calculator {
+  background-color: var(--color-white);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  padding: 2rem;
+  width: 100%;
+  max-width: 30rem;
+}
+
+#result {
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.operand,
+.operator,
+#decimal,
+#clear {
+  border-radius: 0.5rem;
+  color: var(--color-white);
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+  width: 4rem;
+}
+
+.operand {
+  background-color: var(--color-gray-medium);
+  border-color: var(--color-gray-light);
+}
+
+.operator {
+  background-color: var(--color-blue);
+  border-color: var(--color-blue-light);
+}
+
+#clear {
+  background-color: var(--color-coral);
+  border-color: var(--color-salmon);
+}
+
+#enter {
+  background-color: var(--color-mint-darker);
+  border-color: var(--color-powder-ash);
+  border-radius: 0.5rem;
+  color: var(--color-white);
+  font-size: 1.5rem;
+  margin: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+  width: 9rem;
+}

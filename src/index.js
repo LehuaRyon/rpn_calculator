@@ -10,13 +10,16 @@ const APP = express() //instantiate express
 const PORT = 3000 //save port number where server is listening
 const OPERATORS = ["+", "-", "*", "/", "^"]
 
-APP.get("/", (req, res) => {
-  res.sendFile("index.html", { root: __dirname }) // send index.html file to the client
+APP.get("/", (request, response) => {
+  response.sendFile(path.join(__dirname, "index.html"))
+})
+
+APP.get("/style.css", (request, responseC) => {
+  responseC.sendFile(path.join(__dirname, "style.css"))
 })
 
 APP.listen(PORT, () => {
-  // server starts listening on port 3000
-  greetUser()
+  console.log("App available on http://localhost:3000"), greetUser()
 })
 
 colors.setTheme({

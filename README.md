@@ -11,10 +11,10 @@ For this solution, I did my best to mock how a normal computer would compute a e
 An overview of of how the solution evaluates the equation:
 
 1. An input if grabbed from the command line and is checked against to see if the user wants to quit OR if the user has not entered any operators
-2. If the input is a valid RPN equation, the input into turned into an array of strings of each character and the result, `stack`, array is as empty
+2. If the input is a valid RPN equation, the input into turned into an array of strings of each character and the result, `stack`, array starts off as empty
 3. Using a for/of loop, we are iterating through the amount of characters that came from the input
 4. First, we are checking if the character is a number, not a string, and pushing it to the results
-5. Second, since order matters for subtraction and division we are assigning the ` firstNum`` before  `secondNum``
+5. Second, since order matters for subtraction and division we are assigning the ` firstNum` before `secondNum`
 6. Third, if the character is an operator, we are not pushing it to the results and instead use the operator to evaluate the first two numbers in the results
 7. The result is pushed back into the result so it can be used for next operations
 
@@ -22,7 +22,7 @@ An overview of of how the solution evaluates the equation:
 
 I chose to build the CLI tool with Javascript and Node.js due to it's simplicity, performance, documentation, and familiarity. I though about attempting to build it in React instead, but thought that would be overdoing it for what the requirements entailed.
 
-**`index.js`** Where the application begins and handles the logic of the calculator. This includes the RPN evaluation
+**`index.js`** Where the application begins and handles the logic of the calculator. This includes the RPN evaluation.
 
 # Getting the CLI Tool Up and Running
 

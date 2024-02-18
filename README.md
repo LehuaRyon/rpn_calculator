@@ -1,6 +1,6 @@
 # Reverse Polish Notation (RPN) Calculator
 
-The RPN Calculator CLI tool is meant to be used for executing reverse polish notation equations. RPN uses `Postfix` notation, where operators follow the operands `ex. 1 2 3 + -` compared to what we are generally used to, which is `Infix` notation `ex. 1 + 2 + 3`. It has been built to be easy to use for users who are used to CLI tools and utilities. So far the RPN calculator is able to execute addition, subtraction, multiplication, division, and exponentiation.
+The RPN Calculator CLI tool is meant to be used for executing reverse polish notation equations. RPN uses `Postfix` notation, where operators follow the operands `ex. 1 2 3 +` compared to what we are generally used to, which is `Infix` notation `ex. 1 + 2 + 3`. It has been built to be easy to use for users who are used to CLI tools and utilities. So far the RPN calculator is able to execute addition, subtraction, multiplication, division, and exponentiation.
 
 In order to read what is inputted on the command line, I have chosen to use the `inquirer` package, which is a simple way to make the tool interactive as well as being able to have the ability to expand the application if needed at a later time.
 
@@ -18,11 +18,19 @@ An overview of of how the solution evaluates the equation:
 6. Third, if the character is an operator, we are not pushing it to the results and instead use the operator to evaluate the first two numbers in the results
 7. The result is pushed back into the result so it can be used for next operations
 
+An example of the above solution:
+
+- User enters `1, 2, 3 +`
+- All numbers are then added to the result, `stack`, array: `result = [1, 2, 3]`
+- The addition operator is recognized, no more numbers are added to the result array and instead the addition operator is used in execution of the top two numbers: `3 + 2 = 5`
+- The solution equals `5` and is shown to the user
+- The solution is then added back to the result array: `result = [1, 6]`
+
 # Technical Choices & Architecture
 
 I chose to build the CLI tool with Javascript and Node.js due to it's simplicity, performance, documentation, and familiarity. I though about attempting to build it in React instead, but thought that would be overdoing it for what the requirements entailed.
 
-**`index.js`** Where the application begins and handles the logic of the calculator. This includes the RPN evaluation.
+`index.js`: Where the application begins and handles the logic of the calculator. This includes the RPN evaluation.
 
 # Getting the CLI Tool Up and Running
 
@@ -31,10 +39,13 @@ I chose to build the CLI tool with Javascript and Node.js due to it's simplicity
 3. Navigate to the project directory: `cd rpn_calculator`
 4. Install dependencies: `npm install`
 5. Run: `npm start`
-6. Enter RPN expressions when prompted and press enter to see the result.
+6. Enter RPN expressions when prompted (each character needs to be separated by a space) and press enter to see the result.
 7. Enter `q` to exit the calculator
+8. Enter `c` to clear the result, `stack`, in the calculator
 
-# Trade-offs, anything you left out, or done differently more time
+-
+
+# Trade-offs, anything I left out, or done differently more time
 
 - Trying to figure out how to exit the app with `CTL^D`
 - Adding in more operators such as `()`

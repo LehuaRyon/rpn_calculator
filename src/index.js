@@ -27,12 +27,14 @@ colors.setTheme({
   error: ["bold", "red"],
   warning: ["bold", "yellow"],
   success: ["bold", "green"],
+  clear: ["bold", "blue"],
   prompt: ["bold", "gray"],
   farewell: ["bold", "magenta"],
 })
 
 let inputEquation = []
 let errors = []
+let result = []
 
 const greetUser = () => {
   console.log(
@@ -62,6 +64,13 @@ const getUserInput = () => {
         process.exit(1)
       }
 
+      if (inputEquation.trim() === "c") {
+        result = []
+        console.log(colors.clear("Result has been cleared."))
+        getUserInput()
+        return
+      }
+
       // if the input does not contain any operators, return an error and await input again
       if (!findCommonCharacters(inputEquation.trim().split(" "), OPERATORS)) {
         console.log(
@@ -70,6 +79,7 @@ const getUserInput = () => {
               "Invalid input. Please enter a valid RPN equation with operator(s).",
             ),
         )
+
         getUserInput()
         return
       }
@@ -84,11 +94,8 @@ const getUserInput = () => {
 
 const compute = (inputEquation) => {
   let equation = inputEquation.trim().split(" ")
-  let result = []
 
   const evaluateBasedOnOperator = (character) => {
-    // console.log(result)
-
     // if character is a number, not string, push it to the result array
     if (!isNaN(parseFloat(character))) {
       result.push(character)
@@ -110,7 +117,6 @@ const compute = (inputEquation) => {
         return
       case "/": // Division
         if (firstNum === 0) {
-          result = []
           errors.push("Division by zero is not allowed.")
         } else {
           result.push(secondNum / firstNum)
@@ -120,8 +126,7 @@ const compute = (inputEquation) => {
         result.push(Math.pow(secondNum, firstNum))
         return
       default:
-        result = []
-        // result.splice(0, result.length, element)
+        result.push(character)
         errors.push("Invalid input. Please enter a valid RPN equation.")
     }
   }
@@ -137,8 +142,7 @@ const compute = (inputEquation) => {
     console.log(colors.error("Error: ") + colors.red(errors.pop()))
     errors = []
   } else {
-    // show last element in result
-    console.log(colors.success("Result: ") + colors.white(result.pop()))
+    console.log(colors.success("Result: ") + colors.white(result.slice(-1)[0]))
   }
 
   getUserInput()

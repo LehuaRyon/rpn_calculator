@@ -51,7 +51,9 @@ const getUserInput = () => {
       {
         type: "input",
         name: "equation",
-        message: colors.prompt("Enter an equation OR enter 'q' to exit:"),
+        message: colors.prompt(
+          "Enter an equation, enter 'c' to clear the stack, or enter 'q' to exit:",
+        ),
       },
     ])
     .then((input) => {

@@ -43,12 +43,9 @@ I chose to build the CLI tool with Javascript and Node.js due to it's simplicity
 7. Enter `q` to exit the calculator
 8. Enter `c` to clear the result, `stack`, in the calculator
 
--
-
 # Trade-offs, anything I left out, or done differently more time
 
-- Trying to figure out how to exit the app with `CTL^D`
+- Breaking down the app into folders, separation of concerns
+- Convert to Typescript
+- Add Jest Tests
 - Adding in more operators such as `()`
-- Adding tests
-- Breaking down the app into folders
-- Creating a UI, instead of using the command line

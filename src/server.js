@@ -4,22 +4,21 @@ import colors from "colors/safe.js"
 import path from "path"
 import { fileURLToPath } from "url"
 
+// CODE FOR UI: LINES 10-22 + ./public
+// CODE FOR CLI TOOL: LINES 20-157
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const APP = express() //instantiate express
-const PORT = 3000 //save port number where server is listening
+const app = express() //instantiate express
+const PORT = process.env.PORT || 3000 //save port number where server is listening
 const OPERATORS = ["+", "-", "*", "/", "^"]
 
-APP.get("/", (request, response) => {
-  response.sendFile(path.join(__dirname, "index.html"))
-})
+// Serve static files (HTML, CSS, JS)
+app.use(express.static(path.join(__dirname, "public")))
 
-APP.get("/style.css", (request, responseC) => {
-  responseC.sendFile(path.join(__dirname, "style.css"))
-})
-
-APP.listen(PORT, () => {
-  console.log("App available on http://localhost:3000"), greetUser()
+// Listen for incoming requests
+app.listen(PORT, () => {
+  console.log(`App available on http://localhost:${PORT}`), greetUser()
 })
 
 colors.setTheme({
